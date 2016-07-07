@@ -1,5 +1,24 @@
 apply plugin: 'com.android.application'
 
+//获取git commit次数
+def gitVersionCode = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {//git rev-list --count HEAD
+            commandLine 'git', 'rev-list', '--count', 'HEAD'
+            standardOutput = stdout
+        }
+        return Integer.parseInt(stdout.toString().trim())
+    }catch (ignored) {
+        return 0;
+    }
+}
+
+//获取git commit次数
+def getGitVersion() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -8,10 +27,11 @@ android {
         applicationId "com.sharpandroid"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
+        versionCode gitVersionCode()//获取git commit次数
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -30,3 +50,4 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha3'
     testCompile 'junit:junit:4.12'
 }
+
