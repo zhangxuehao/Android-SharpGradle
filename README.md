@@ -6,5 +6,8 @@ Android每一次打包，总需要手动改正编译中的versionCode，因为�
 ## 利用Gradle获取properties配置文件
 java代码也可以，但是gradle也是可以获取properties配置文件内容的。同样我们在version.properties中写了一个版本名称。用Gradle文件来实现读取。
 
-##利用Gradle对文件进行操作
-在Android studio的build文件夹下是编译
+## 利用Gradle对文件进行操作
+在Android studio的build文件夹下是编译所产生的文件，对文件命名是一个仙儿易见得需求。
+
+## 从控制台录入签名和从环境变量中获取签名信息
+对于扁平化的公司而言，开发聊聊几个人，但是如果企业规模较大，开发团队比较大，处于安全考虑，不希望把应用的签名信息直接写到gradle中，这里有两周方法，一中是从环境变量中获取，另外一种是从控制台录入。
