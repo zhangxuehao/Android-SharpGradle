@@ -1,5 +1,10 @@
 >Android studio 的编译脚本有诸多功能，更多的利用这些功能，会让IDE变成你的开发利器。
 
 ## 利用Gradle获取git提交的内容
-
 Android每一次打包，总需要手动改正编译中的versionCode，因为新版本总是要比上一版大的，这就会非常麻烦。git中的commit次数是一个不错的idea。这样就会让versionCode肯定会大于上个版本，不过增长过快也算是一个不怎么友好的地方。
+
+## 利用Gradle获取properties配置文件
+java代码也可以，但是gradle也是可以获取properties配置文件内容的。同样我们在version.properties中写了一个版本名称。用Gradle文件来实现读取。
+
+##利用Gradle对文件进行操作
+在Android studio的build文件夹下是编译

@@ -9,7 +9,7 @@ def gitVersionCode = { ->
             standardOutput = stdout
         }
         return Integer.parseInt(stdout.toString().trim())
-    }catch (ignored) {
+    } catch (ignored) {
         return 0;
     }
 }
@@ -17,6 +17,15 @@ def gitVersionCode = { ->
 //获取git commit次数
 def getGitVersion() {
     return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+// 利用Gradle获取properties配置文件
+Properties properties = new Properties()
+println project.file('version.properties').absolutePath
+if (project.file('version.properties').exists()) {
+    properties.load(project.file('version.properties').newDataInputStream())
+} else {
+    println "version.properties not found"
 }
 
 android {
@@ -28,7 +37,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode gitVersionCode()//获取git commit次数
-        versionName "1.0.0"
+        versionName properties.getProperty("version")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
